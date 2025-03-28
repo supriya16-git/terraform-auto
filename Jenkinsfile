@@ -75,7 +75,7 @@ pipeline {
                     // Correct inventory format with new public IP
                    writeFile file: '/home/ubuntu/automation/Ansible/inventory.ini', text: """
                    [webserver]
-                   ${public_ip} ansible_user=ubuntu ansible_ssh_private_key_file=/var/lib/jenkins/keys/id_rsa -o StrictHostKeyChecking=no
+                   ${public_ip} ansible_user=ubuntu ansible_ssh_private_key_file=/var/lib/jenkins/keys/id_rsa
                     """
                  }
             }
@@ -86,7 +86,7 @@ pipeline {
               echo 'Running Ansible Playbook...'
               dir('/home/ubuntu/automation/Ansible') {
                   sh '''
-                  ansible-playbook -i inventory.ini playbook.yml
+                  ansible-playbook -i inventory.ini playbook.yml -o StrictHostKeyChecking=no
                   '''
                 }  
             }
