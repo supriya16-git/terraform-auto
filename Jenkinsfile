@@ -37,7 +37,7 @@ pipeline {
         stage('Clone Repository') {
             steps {
                 echo 'Cloning GitHub repository...'
-                git 'https://github.com/supriya16-git/auto-jenkins-terra-ansi.git'
+                git 'https://github.com/supriya16-git/terraform-auto.git'
             }
         }
 
