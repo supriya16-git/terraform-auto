@@ -7,7 +7,7 @@ pipeline {
         AWS_ACCESS_KEY_ID     = credentials('aws_access_key')
         AWS_SECRET_ACCESS_KEY = credentials('aws_secret_key')
         AWS_REGION            = 'ap-south-1'          // Hardcoded region
-        S3_BUCKET_NAME        = '24th-cherry-bucket'       // Hardcoded S3 bucket name
+        S3_BUCKET_NAME        = '25th-cherry-bucket'       // Hardcoded S3 bucket name
         TF_STATE_BUCKET       = 'my-terraform-state'  // S3 bucket for storing state
         DYNAMODB_TABLE        = 'my-terraform-lock'   // DynamoDB for state locking
     }
@@ -63,7 +63,7 @@ pipeline {
                 script {
                     def public_ip = sh(script: '''
                         cd Terraform
-                        terraform output -raw public_ip
+                        terraform output -raw instance_ip
                     ''', returnStdout: true).trim()
 
                     if (public_ip == null || public_ip == "") {
