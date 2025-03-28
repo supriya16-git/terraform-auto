@@ -7,7 +7,7 @@ pipeline {
         AWS_ACCESS_KEY_ID     = credentials('aws_access_key')
         AWS_SECRET_ACCESS_KEY = credentials('aws_secret_key')
         AWS_REGION            = 'ap-south-1'          // Hardcoded region
-        S3_BUCKET_NAME        = '25th-cherry-bucket'       // Hardcoded S3 bucket name
+        S3_BUCKET_NAME        = '27th-cherry-bucket'       // Hardcoded S3 bucket name
         TF_STATE_BUCKET       = 'my-terraform-state'  // S3 bucket for storing state
         DYNAMODB_TABLE        = 'my-terraform-lock'   // DynamoDB for state locking
     }
@@ -75,7 +75,7 @@ pipeline {
                     // Correct inventory format with new public IP
                    writeFile file: '/home/ubuntu/automation/Ansible/inventory.ini', text: """
                    [webserver]
-                   ${public_ip} ansible_user=ubuntu ansible_ssh_private_key_file=/var/lib/jenkins/keys/id_rsa
+                   ${public_ip} ansible_user=ubuntu ansible_ssh_private_key_file=/var/lib/jenkins/keys/id_rsa -o StrictHostKeyChecking=no
                     """
                  }
             }
