@@ -7,7 +7,7 @@ pipeline {
         AWS_ACCESS_KEY_ID     = credentials('aws_access_key')
         AWS_SECRET_ACCESS_KEY = credentials('aws_secret_key')
         AWS_REGION            = 'ap-south-1'          // Hardcoded region
-        S3_BUCKET_NAME        = '19th-cherry-bucket'       // Hardcoded S3 bucket name
+        S3_BUCKET_NAME        = '20th-cherry-bucket'       // Hardcoded S3 bucket name
         TF_STATE_BUCKET       = 'my-terraform-state'  // S3 bucket for storing state
         DYNAMODB_TABLE        = 'my-terraform-lock'   // DynamoDB for state locking
     }
@@ -73,7 +73,7 @@ pipeline {
             steps {
                 echo 'Running Ansible Playbook...'
                 sh '''
-                ansible-playbook -i automation/Ansible/inventory.ini automation/Ansible/playbook.yml
+                ansible-playbook -i Ansible/inventory.ini Ansible/playbook.yml
                 '''
             }
         }
