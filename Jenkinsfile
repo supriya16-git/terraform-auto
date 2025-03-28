@@ -7,7 +7,7 @@ pipeline {
         AWS_ACCESS_KEY_ID     = credentials('aws_access_key')
         AWS_SECRET_ACCESS_KEY = credentials('aws_secret_key')
         AWS_REGION            = 'ap-south-1'          // Hardcoded region
-        S3_BUCKET_NAME        = '17th-cherry-bucket'       // Hardcoded S3 bucket name
+        S3_BUCKET_NAME        = '18th-cherry-bucket'       // Hardcoded S3 bucket name
         TF_STATE_BUCKET       = 'my-terraform-state'  // S3 bucket for storing state
         DYNAMODB_TABLE        = 'my-terraform-lock'   // DynamoDB for state locking
     }
@@ -59,21 +59,15 @@ pipeline {
 
         stage('Fetch Public IP & Create Inventory') {
             steps {
-                echo 'Fetching public IP and creating inventory...'
                 script {
-                    def public_ip = sh(script: '''
-                        cd Terraform
-                        terraform output -raw instance_ip
-                    ''', returnStdout: true).trim()
-
-                    echo "Public IP: ${public_ip}"
-                    writeFile file: 'Ansible/inventory.ini', text: """
-                    [webserver]
-                    ${public_ip} ansible_user=ubuntu ansible_ssh_private_key_file=/var/lib/jenkins/keys/id_rsa ansible_ssh_common_args='-o StrictHostKeyChecking=no'
-                    """
+                    def public_ip = sh(script: "terraform output -raw public_ip", returnStdout: true).trim()
+                    if (!public_ip || public_ip == "null") {
+                        error "Failed to fetch public IP. Check Terraform output."
+                    }
+                    writeFile file: 'Ansible/inventory', text: "[webserver]\n${public_ip} ansible_user=ubuntu"
                 }
-           }
-       }
+            }
+        }
 
         stage('Run Ansible Playbook') {
             steps {
