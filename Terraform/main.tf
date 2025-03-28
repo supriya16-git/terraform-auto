@@ -11,5 +11,7 @@ resource "aws_instance" "cherry_instance" {
 # Create S3 bucket
 resource "aws_s3_bucket" "cherry_bucket" {
   bucket = "cherry-bucket"
-  acl    = "private"
+  lifecycle {
+    ignore_changes = [bucket]
+  }
 }
