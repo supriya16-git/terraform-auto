@@ -2,7 +2,7 @@
 resource "aws_instance" "cherry_instance" {
   ami           = "ami-0e35ddab05955cf57"  # Replace with valid AMI ID
   instance_type = "t2.micro"
-  key_name      = "Jenkinslave.pem"                   # Replace with key name
+  key_name      = "Jenkinslave"                   # Replace with key name
   tags = {
     Name = "jenkins-ec2-instance"
   }
