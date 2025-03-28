@@ -62,7 +62,7 @@ pipeline {
                 echo 'Fetching public IP and creating inventory...'
                 script {
                     def public_ip = sh(script: '''
-                        cd terraform
+                        cd Terraform
                         terraform output -raw instance_ip
                     ''', returnStdout: true).trim()
 
