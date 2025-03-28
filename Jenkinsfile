@@ -44,7 +44,7 @@ pipeline {
         stage('Terraform Init & Apply') {
             steps {
                 echo 'Initializing and applying Terraform...'
-                dir('terraform') {
+                dir('Terraform') {
                     sh '''
                     terraform init -backend-config="bucket=${TF_STATE_BUCKET}" \
                                    -backend-config="key=jenkins-terraform.tfstate" \
