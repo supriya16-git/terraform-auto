@@ -73,7 +73,7 @@ pipeline {
                     echo "Public IP: ${public_ip}"
             
                     // Correct inventory format with new public IP
-                   writeFile file: '/home/ubuntu/automation/Ansible/inventory.ini', text: "[webserver]\n${public_ip} ansible_user=ubuntu"
+                   writeFile file: '/home/ubuntu/workspace/terraform-auto/automation/Ansible/inventory.ini', text: "[webserver]\n${public_ip} ansible_user=ubuntu"
                  }
             }
       }
