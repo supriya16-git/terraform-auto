@@ -10,7 +10,7 @@ resource "aws_instance" "cherry_instance" {
 
 # Create S3 bucket
 resource "aws_s3_bucket" "cherry_bucket" {
-  bucket = "32nd-cherry-bucket"
+  bucket = "33rd-cherry-bucket"
   lifecycle {
     ignore_changes = [bucket]
   }
