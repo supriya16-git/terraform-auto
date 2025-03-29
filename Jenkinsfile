@@ -81,8 +81,14 @@ pipeline {
       stage('Checkout Code') {
           steps {
               checkout scm
+              echo 'Checking out Ansible playbook...'
+              dir('automation/Ansible') {
+              sh '''
+              git pull origin main
+              '''
               }
           }
+      }
 
       stage('Run Ansible Playbook') {
           steps {
